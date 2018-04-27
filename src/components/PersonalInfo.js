@@ -18,7 +18,7 @@ export class PersonalInfo extends React.Component {
         super(props);
         console.log("scond props",props);
         this.userObject=this.props.introObject;
-        console.log("userObjecyt",this.userObject);
+     
       
     }
 
@@ -57,7 +57,9 @@ export class PersonalInfo extends React.Component {
         console.log("userObjecy final",this.userObject);
 
         const db=firebase.database().ref("users");
-        db.push().set(this.userObject);
+        db.push().set(this.userObject).catch(err=>{alert("Oops, seomething went wrong....", err)})
+        
+        alert("Data saved successfully...");
         
     }
 
@@ -179,7 +181,9 @@ export class PersonalInfo extends React.Component {
 </div>
 </div>
 
-<div className="submitbtn"><div><a className="waves-effect waves-light btn text text-white" onClick={this.submitForm.bind(this)}>Submit</a></div></div>
+
+
+<div className="submitbtn" id="submitalert"><div><a className="waves-effect waves-light btn text text-white" id="submitbtn" onClick={this.submitForm.bind(this)}>Submit</a></div></div>
         
                 </form>  
             </div>
