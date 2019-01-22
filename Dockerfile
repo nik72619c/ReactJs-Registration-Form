@@ -1,17 +1,18 @@
-FROM node:latest
+FROM node:10.13-alpine
+# The base node image sets a very verbose log level.
+ENV NPM_CONFIG_LOGLEVEL warn
+
+# Copy all local files into the image.
+COPY . .
+
+# Build for production.
 
 
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
+# Install `serve` to run the application.
 
-COPY package.json /usr/src/app
-COPY package-lock.json /usr/src/app
 
-RUN npm install 
+# Set the command to start the node server.
+CMD npm start
 
-ADD src /usr/src/app/src
-ADD public /usr/src/app/public
-
-EXPOSE 3000
-
-CMD ["npm","start"]
+# Tell Docker about the port we'll run on.
+EXPOSE 80
